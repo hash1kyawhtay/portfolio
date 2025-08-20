@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Kyaw Htay</title>
+  <meta name="description" content="Portfolio of Your Name — projects, skills, and contact." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --surface: #12151c;
+      --text: #e6e9ef;
+      --muted: #a4acb9;
+      --primary: #6ee7ff; /* accent */
+      --ring: rgba(110, 231, 255, 0.35);
+      --card: #151926;
+      --border: #23283a;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 16px;
+      --container: 1100px;
+    }
+    
+    /* Optional light theme */
+    [data-theme="light"] {
+      --bg: #f7fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #2563eb;
+      --ring: rgba(37, 99, 235, 0.2);
+      --card: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(110,231,255,0.12), transparent 60%),
+                  radial-gradient(900px 500px at 120% 10%, rgba(168,85,247,0.10), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: min(100% - 2rem, var(--container)); margin-inline: auto; }
+
+    /* ======= Header / Navbar ======= */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(8px);
+      background: color-mix(in oklab, var(--bg) 80%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: .9rem 0; }
+    .brand { display:flex; align-items:center; gap:.6rem; font-weight: 700; letter-spacing: .5px; }
+    .brand .logo { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--primary), #a855f7); box-shadow: 0 6px 20px var(--ring); }
+    nav ul { list-style: none; display:flex; gap: 1.2rem; margin:0; padding:0; }
+    nav a { color: var(--muted); font-weight: 500; }
+    nav a:hover, nav a:focus { color: var(--text); }
+
+    .nav-actions { display:flex; align-items:center; gap:.75rem; }
+
+    .btn, button.btn { 
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.6rem .95rem; border-radius: 999px; border:1px solid var(--border);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 70%, transparent), var(--surface));
+      color: var(--text); font-weight:600; box-shadow: var(--shadow);
+    }
+    .btn.primary { border-color: color-mix(in oklab, var(--primary) 30%, var(--border)); background:
+      linear-gradient(180deg, color-mix(in oklab, var(--primary) 18%, var(--surface)), var(--surface));
+    }
+
+    .icon-btn { width: 40px; height: 40px; border-radius: 999px; border:1px solid var(--border); background: var(--surface); display:grid; place-items:center; }
+
+    /* Mobile menu */
+    #menuToggle { display:none; }
+    .hamburger { display:none; }
+    @media (max-width: 800px) {
+      nav ul { display:none; position:absolute; left: 1rem; right:1rem; top: 64px; background: var(--surface); padding: .8rem; border:1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); }
+      nav ul.show { display:flex; flex-direction:column; }
+      .hamburger { display:inline-grid; }
+    }
+
+    /* ======= Hero ======= */
+    .hero { padding: 6rem 0 4rem; display:grid; align-items:center; grid-template-columns: 1.2fr .8fr; gap: 2rem; }
+    .kicker { color: var(--primary); font-weight:700; letter-spacing:.16em; text-transform:uppercase; font-size:.85rem; }
+    .title { font-size: clamp(1.8rem, 4vw, 3.2rem); line-height: 1.1; margin: .6rem 0 1rem; }
+    .subtitle { color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.15rem); }
+    .hero-actions { margin-top: 1.4rem; display:flex; gap:.8rem; flex-wrap:wrap; }
+    .hero .media { position: relative; }
+    .hero .card { background: var(--card); border:1px solid var(--border); border-radius: var(--radius); padding: .75rem; box-shadow: var(--shadow); }
+    .hero .portrait { aspect-ratio: 1/1; border-radius: calc(var(--radius) + 12px); overflow:hidden; }
+    .hero .glow { position:absolute; inset:auto 0 -30px 0; height: 60px; filter: blur(20px); background: radial-gradient(60% 80% at 50% 0, var(--primary), transparent); opacity:.35; }
+
+    @media (max-width: 1000px) { .hero { grid-template-columns: 1fr; } }
+
+    /* ======= Section base ======= */
+    section { padding: 5rem 0; }
+    .section-title { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .6rem; }
+    .section-desc { color: var(--muted); margin: 0 0 2rem; }
+
+    /* ======= About ======= */
+    .about { display:grid; grid-template-columns: .9fr 1.1fr; gap: 2rem; }
+    .about .card { background: var(--card); border:1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; box-shadow: var(--shadow); }
+    .chips { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .chip { padding:.4rem .7rem; border-radius: 999px; border:1px solid var(--border); color: var(--muted); background: var(--surface); font-size:.9rem; }
+    @media (max-width: 900px){ .about { grid-template-columns: 1fr; } }
+
+    /* ======= Projects ======= */
+    .projects-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .project-card { background: var(--card); border:1px solid var(--border); border-radius: 18px; overflow:hidden; display:flex; flex-direction:column; transition: transform .2s ease, border-color .2s ease; }
+    .project-card:hover { transform: translateY(-4px); border-color: color-mix(in oklab, var(--primary) 30%, var(--border)); }
+    .project-thumb { aspect-ratio: 16/10; object-fit: cover; }
+    .project-body { padding: 1rem 1rem 1.1rem; display:flex; flex-direction:column; gap:.5rem; }
+    .project-title { font-weight: 700; }
+    .project-meta { color: var(--muted); font-size:.95rem; }
+    .project-actions { margin-top: .6rem; display:flex; gap:.6rem; }
+
+    @media (max-width: 1050px){ .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 650px){ .projects-grid { grid-template-columns: 1fr; } }
+
+    /* ======= Contact ======= */
+    .contact-grid { display:grid; grid-template-columns: 1fr .9fr; gap: 1.2rem; }
+    .contact-card { background: var(--card); border:1px solid var(--border); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow); }
+    form { display:grid; gap:.8rem; }
+    label { font-weight: 600; font-size:.95rem; }
+    input, textarea { width:100%; padding:.8rem .9rem; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); }
+    textarea { min-height: 130px; resize: vertical; }
+
+    @media (max-width: 900px){ .contact-grid { grid-template-columns: 1fr; } }
+
+    /* ======= Footer ======= */
+    footer { padding: 2.5rem 0 4rem; color: var(--muted); border-top:1px solid var(--border); margin-top:2rem; }
+    .footer-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+    .socials { display:flex; gap:.6rem; }
+    .socials a { display:grid; place-items:center; width:38px; height:38px; border-radius:999px; border:1px solid var(--border); background: var(--surface); }
+
+    /* ======= Utilities ======= */
+    .visually-hidden { position:absolute !important; height:1px; width:1px; overflow:hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+    .fade-up { opacity: 0; transform: translateY(12px); transition: all .6s cubic-bezier(.2,.8,.2,1); }
+    .fade-up.revealed { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Go to home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>#1</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <button class="icon-btn hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu" id="menuBtn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <ul id="mobileMenu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+          <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="container">
+    <!-- ======= Hero ======= -->
+    <section class="hero">
+      <div>
+        <div class="kicker fade-up">Hello, I’m</div>
+        <h1 class="title fade-up" style="transition-delay:.05s">Kyaw Htay— <span style="color:var(--primary)">Fresh Graduate</span> & DevOps Developer</h1>
+        <p class="subtitle fade-up" style="transition-delay:.1s">I want to apply all my knowledge and experience for making our lives easier and secure. </p>
+        <div class="hero-actions fade-up" style="transition-delay:.15s">
+          <a class="btn primary" href="mailto:hashonekyawhtay@gmail.com">Contact Me</a>
+          <a class="btn" href="#projects">See Projects</a>
+          <a class="btn" href="assets/resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+        </div>
+      </div>
+
+      <div class="media fade-up" style="transition-delay:.1s">
+        <div class="card portrait">
+          <img src="assets/mw1.jpg" alt="Abstract developer workspace" class="thumb" />
+        </div>
+        <div class="glow" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ======= About ======= -->
+    <section id="about">
+      <h2 class="section-title fade-up">About</h2>
+      <p class="section-desc fade-up" style="transition-delay:.05s">I’m a final year Computer Science student from University of Computer Studies, Taungoo.I am seeking internship as a DevOps Engineer in Singapore.</p>
+
+      <div class="about">
+        <div class="card fade-up">
+          <h3>What I Know</h3>
+          <p>I have decent knowledge in DevOps role and strong experience of web development ,android app development and database management system.Writing CICD pipeline ,Monotoring with Elastic Stack and Currenty learning new tools and technologies to apply in the real world projects.</p>
+          <div class="chips" aria-label="Key skills">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">PHP</span>
+            <span class="chip">Docker</span>
+            <span class="chip">Kubernetes</span>
+            <span class="chip">CI/CD</span>
+            <span class="chip">ELK</span>
+          </div>
+        </div>
+        <div class="card fade-up" style="transition-delay:.05s">
+          <h3>Highlights</h3>
+          <ul>
+            <li>Built more than 10 projects with modern stacks</li>
+            <li>Build a voting application for my University</li>
+            <li>Wrote CICD pipleline for a php web application</li>
+            <li>Monitored host machines and VMs with ELK Stack</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Projects ======= -->
+    <section id="projects">
+  <h2 class="section-title fade-up">Projects</h2>
+  <p class="section-desc fade-up" style="transition-delay:.05s">A selection of my academic and internship projects. More on my GitHub.</p>
+
+  <div class="projects-grid">
+    <!-- Car Showroom -->
+    <article class="project-card fade-up">
+      <img class="project-thumb" src="assets/car.jpeg" alt="Car Showroom Project" />
+      <div class="project-body">
+        <div class="project-title">Car Showroom</div>
+        <div class="project-meta">First Year — HTML/CSS</div>
+        <p>A simple static website for a car showroom with styled layouts and product display.</p>
+      </div>
+    </article>
+
+    <!-- Sweet Home Decoration -->
+    <article class="project-card fade-up" style="transition-delay:.05s">
+      <img class="project-thumb" src="assets/home.png" alt="Sweet Home Decoration" />
+      <div class="project-body">
+        <div class="project-title">Sweet Home Decoration</div>
+        <div class="project-meta">Hackathon — Prototype</div>
+        <p>A prototype project built during a hackathon, focusing on creative interior design ideas.</p>
+      </div>
+    </article>
+
+    <!-- DBMS for Honda Showroom -->
+    <article class="project-card fade-up" style="transition-delay:.1s">
+      <img class="project-thumb" src="assets/honda.avif" alt="Honda Showroom DBMS" />
+      <div class="project-body">
+        <div class="project-title">DBMS for Honda Showroom</div>
+        <div class="project-meta">Second Year — MySQL</div>
+        <p>Database system designed to manage Honda showroom records. <strong>1st Prize</strong> winner.</p>
+      </div>
+    </article>
+
+    <!-- Auction Management System -->
+    <article class="project-card fade-up" style="transition-delay:.15s">
+      <img class="project-thumb" src="assets/auction.jpg" alt="Auction Management System" />
+      <div class="project-body">
+        <div class="project-title">Auction Management System</div>
+        <div class="project-meta">Second Year — J2EE (JSP)</div>
+        <p>A web application for managing online auctions with user bidding functionality.</p>
+      </div>
+    </article>
+
+    <!-- MM Electronics -->
+    <article class="project-card fade-up" style="transition-delay:.2s">
+      <img class="project-thumb" src="assets/mme.jpg" alt="MM Electronics Project" />
+      <div class="project-body">
+        <div class="project-title">MM Electronics</div>
+        <div class="project-meta">UCST Contest — J2EE (JSP)</div>
+        <p>E-commerce style system for electronics. Awarded <strong>Best Effort</strong> prize.</p>
+      </div>
+    </article>
+
+    <!-- POS PHP -->
+    <article class="project-card fade-up" style="transition-delay:.25s">
+      <img class="project-thumb" src="assets/pos.png" alt="POS System PHP" />
+      <div class="project-body">
+        <div class="project-title">#1 POS (PHP)</div>
+        <div class="project-meta">Third Year — PHP/XAMPP</div>
+        <p>Point-of-sale system developed with PHP and XAMPP for small businesses.</p>
+      </div>
+    </article>
+
+    <!-- POS C# -->
+    <article class="project-card fade-up" style="transition-delay:.3s">
+      <img class="project-thumb" src="assets/pos1.jpeg" alt="POS System C#" />
+      <div class="project-body">
+        <div class="project-title">#1 POS (C#)</div>
+        <div class="project-meta">Third Year — C# (ADO.Net)</div>
+        <p>A desktop-based point-of-sale system built with C# and ADO.Net.</p>
+      </div>
+    </article>
+
+    <!-- UCST Fresher Welcome Voting App -->
+    <article class="project-card fade-up" style="transition-delay:.35s">
+      <img class="project-thumb" src="assets/voting.png" alt="Voting App" />
+      <div class="project-body">
+        <div class="project-title">UCST Fresher Welcome Voting App</div>
+        <div class="project-meta">Fourth Year — Android (Java)</div>
+        <p>An Android app for managing fresher welcome event voting securely.</p>
+      </div>
+    </article>
+
+    <!-- Real Estate Accounting -->
+    <article class="project-card fade-up" style="transition-delay:.4s">
+      <img class="project-thumb" src="assets/real.jpg" alt="Real Estate Accounting" />
+      <div class="project-body">
+        <div class="project-title">#1 Real Estate Accounting</div>
+        <div class="project-meta">Business Plan Contest</div>
+        <p>Designed a real estate business accounting solution. Presented in business plan contest.</p>
+      </div>
+    </article>
+
+    <!-- Phishing Social Engineering -->
+    <article class="project-card fade-up" style="transition-delay:.45s">
+      <img class="project-thumb" src="assets/phishing.png" alt="Phishing Attack Simulation" />
+      <div class="project-body">
+        <div class="project-title">Phishing</div>
+        <div class="project-meta">Fourth Year — Social Engineering</div>
+        <p>A study and practical demonstration of phishing and social engineering attacks.</p>
+      </div>
+    </article>
+
+    <!-- Blood Bank -->
+    <article class="project-card fade-up" style="transition-delay:.5s">
+      <img class="project-thumb" src="assets/blood.jpeg" alt="Blood Bank" />
+      <div class="project-body">
+        <div class="project-title">Blood Bank</div>
+        <div class="project-meta">Fourth Year — Java (RMI)</div>
+        <p>Distributed system for blood bank management using Java RMI.</p>
+      </div>
+    </article>
+
+    <!-- BubbleLand Taungoo -->
+    <article class="project-card fade-up" style="transition-delay:.55s">
+      <img class="project-thumb" src="assets/bubble.jpeg" alt="BubbleLand Taungoo" />
+      <div class="project-body">
+        <div class="project-title">BubbleLand Taungoo</div>
+        <div class="project-meta">Fourth Year — OOSD/DBMS/PHP</div>
+        <p>Web and DBMS solution for a local cold drinks and snacks shop with real data.</p>
+      </div>
+    </article>
+
+    <!-- Mobile Shop POS -->
+    <article class="project-card fade-up" style="transition-delay:.6s">
+      <img class="project-thumb" src="assets/pos2.png" alt="Mobile Shop POS" />
+      <div class="project-body">
+        <div class="project-title">Mobile Shop POS</div>
+        <div class="project-meta">Fifth Year — C# (ADO.Net)</div>
+        <p>Point-of-sale system built for mobile shops with inventory and sales tracking.</p>
+      </div>
+    </article>
+
+    <!-- UCST Internship Portal -->
+    <article class="project-card fade-up" style="transition-delay:.65s">
+      <img class="project-thumb" src="assets/ucst.png" alt="UCST Internship Portal" />
+      <div class="project-body">
+        <div class="project-title">UCST Internship Portal</div>
+        <div class="project-meta">Internship — PHP/CI/CD</div>
+        <p>A web portal for UCST internship management with CI/CD pipeline integration.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+    <!-- ======= Contact ======= -->
+    <section id="contact">
+      <h2 class="section-title fade-up">Contact</h2>
+      <p class="section-desc fade-up" style="transition-delay:.05s">Have a project in mind or just want to say hello? Drop a message.</p>
+
+      <div class="contact-grid">
+        <div class="contact-card fade-up">
+          <h3>Let’s work together</h3>
+          <p>Email: <a href="mailto:you@example.com">hashonekyawhtay@gmail.com</a></p>
+          <p>Location: Yangon, Myanmar</p>
+          <div class="chips">
+            <span class="chip">Available for hire</span>
+            <span class="chip">Remote-friendly</span>
+          </div>
+        </div>
+
+        <div class="contact-card fade-up" style="transition-delay:.05s">
+          <form action="https://formspree.io/f/mldlygjg" method="POST">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea>
+
+            <button class="btn primary" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>© <span id="year"></span> Kyaw Htay. All rights reserved.</div>
+      <div class="socials" aria-label="Social links">
+        <a href="https://github.com/hash1kyawhtay" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.6c0 5.3 3.4 9.7 8.2 11.3.6.1.8-.3.8-.6v-2c-3.3.7-4-1.5-4-1.5-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.6 1.2 1.6 1.2 1 .1.8-.8 1.6-1.1-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.5 1.2-3.4-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.3a11.5 11.5 0 0 1 6.2 0c2.3-1.6 3.3-1.3 3.3-1.3.6 1.7.3 3 .2 3.3.8.9 1.2 2.1 1.2 3.4 0 4.6-2.7 5.6-5.3 5.9.9.7 1.6 2 1.6 4v3c0 .3.2.8.8.6 4.9-1.6 8.2-6 8.2-11.3A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/hashonekyawhtay" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5.001 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3V9Zm6 0h3.6v1.7h.1c.5-.9 1.7-1.8 3.4-1.8C19.7 8.9 21 11 21 14.2V21h-4v-6c0-1.4 0-3.2-2-3.2s-2.3 1.6-2.3 3.1V21H9V9Z"/></svg>
+        </a>
+        <a href="mailto:hashonekyawhtay@gmail.com" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11A2.5 2.5 0 0 1 19.5 20h-15A2.5 2.5 0 0 1 2 17.5v-11Zm2.5-.5a.5.5 0 0 0-.5.5v.3l8 4.7 8-4.7V6.5a.5.5 0 0 0-.5-.5h-15Zm15 3.6-7.3 4.2a1 1 0 0 1-1 0L4.9 9.6V17a.5.5 0 0 0 .5.5h13.2a.5.5 0 0 0 .5-.5V9.6Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('show');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+
+    // Theme toggle (light/dark)
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const savedTheme = localStorage.getItem('theme');
+
+    function applyTheme(theme){
+      if(theme === 'light') document.documentElement.setAttribute('data-theme','light');
+      else document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', theme);
+      renderThemeIcon();
+    }
+    function renderThemeIcon(){
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      themeIcon.innerHTML = isLight
+        ? '<path d="M12 3v2m0 14v2m9-9h-2M5 12H3m13.66 6.66-1.41-1.41M6.76 6.76 5.34 5.34m12.02 0-1.41 1.41M6.76 17.24 5.34 18.66M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+        : '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="2" fill="none"/>'
+    }
+    applyTheme(savedTheme || (prefersLight ? 'light' : 'dark'));
+    themeBtn?.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      applyTheme(isLight ? 'dark' : 'light');
+    });
+
+    // Reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      })
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
