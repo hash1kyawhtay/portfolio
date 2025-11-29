@@ -30,6 +30,27 @@
       --radius: 16px;
       --container: 1100px;
     }
+    #education {
+  margin-top: 30px;
+}
+
+.education-item {
+  padding: 15px;
+  border-left: 4px solid #4a90e2;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.education-item h4 {
+  margin-bottom: 5px;
+}
+
+.education-item .school,
+.education-item .year {
+  margin: 0;
+  color: #555;
+}
+
     
     /* Optional light theme */
     [data-theme="light"] {
@@ -226,7 +247,7 @@
 
     <!-- ======= About ======= -->
     <section id="about">
-      <h2 class="section-title fade-up">About</h2>
+      <h2 class="section-title fade-up">About Me</h2>
       <p class="section-desc fade-up" style="transition-delay:.05s">Hello! I’m Kyaw Htay, a Computer Science graduate and an aspiring DevOps Engineer with a strong passion for automation, cloud technologies, and modern software delivery practices. I enjoy building systems that make development faster, infrastructure more reliable, and deployments smoother.
 
 During my academic journey and hands-on internship experience, I worked with tools such as Linux, GitHub Actions, Docker, Kubernetes, CI/CD pipelines, and monitoring tools. I love solving real-world problems by combining development and operations, and I’m always eager to learn and adapt to new technologies.
@@ -235,10 +256,32 @@ My goal is to contribute to a forward-thinking team where I can apply my skills 
 
 Outside of tech, I enjoy exploring new ideas, learning continuously, and building small projects that challenge me to grow.</p>
 
+      <section id="education">
+  <h3>Education</h3>
+  <div class="education-item">
+    <h4>Bachelor of Computer Science</h4>
+    <p class="school">University of Computer Studies (Your City)</p>
+    <p class="year">2020 – 2024</p>
+    <ul>
+      <li>Specialized in software development and DevOps foundations</li>
+      <li>Completed multiple academic and real-world projects</li>
+      <li>Learned core subjects: Data Structures, Algorithms, Networking, Database Systems, OS</li>
+    </ul>
+  </div>
+</section>
+
+
       <div class="about">
         <div class="card fade-up">
           <h3>What I Know</h3>
           <div class="chips">
+            <span class="chip"><i class="devicon-html5-plain colored"></i></span>
+            <span class="chip"><i class="devicon-css3-plain colored"></i></span> 
+            <span class="chip"><i class="devicon-php-plain colored"></i></span> 
+            <span class="chip"><i class="devicon-docker-plain colored"></i></span> 
+            <span class="chip"><i class="devicon-kubernetes-plain colored"></i></span> 
+            <span class="chip"><i class="devicon-githubactions-plain colored"></i></span>
+            <span class="chip"><i class="devicon-elasticsearch-plain colored"></i></span>
           <span class="chip"><i class="devicon-mysql-plain colored"></i></span>
           <span class="chip"><i class="devicon-java-plain colored"></i></span>
           <span class="chip"><i class="devicon-csharp-plain colored"></i></span>
